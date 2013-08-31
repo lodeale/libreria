@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Inicio extends CI_Controller{
 
@@ -13,6 +13,8 @@ class Inicio extends CI_Controller{
 		$this->load->view("include/footer");
 	
 	}
+
 }
 
-?>
+/* End of file inicio.php */
+/* Location: ./application/controllers/inicio.php */

@@ -2,45 +2,22 @@
 		<div id="wrapper">
 			<section id="sec_left">
 				<h3>Bastesellers</h3>
+				<?php foreach($libros as $row): ?>
 				<article>
 					<div>
 						<span class="r_image">
-							<img src="<?php echo base_url(); ?>assets/img/image1" title="">
+							<img src="<?php echo base_url(); ?>assets/img/<?php echo $row->imagen; ?>" title="">
 						</span>
 					</div>
 					<div>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.
+							<?php  
+								echo $row->titulo . "<br>" . $row->descripcion;
+							?>
 						</p>
 					</div>
 				</article>
-				<article>
-					<div>
-						<span class="r_image">
-							<img src="<?php echo base_url(); ?>assets/img/image2" title="">
-						</span>
-					</div>
-					<div>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.
-						</p>
-					</div>
-				</article>	
-				<article>
-					<div>
-						<span class="r_image">
-							<img src="<?php echo base_url(); ?>assets/img/image3" title="">
-						</span>
-					</div>
-					<div>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.
-						</p>
-					</div>
-				</article>			
+				<?php endforeach; ?>		
 			</section>
 			<section id="sec_right">
 				<h3>Bastesellers</h3>

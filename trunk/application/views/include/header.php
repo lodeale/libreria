@@ -4,14 +4,71 @@
 	<meta charset="UTF-8">
 	<title>libreria</title>
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/estilo.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#bto_login").click(function(){
+				$(".login").fadeIn();
+			});
+		});
+	</script>
 </head>
 <body>
+	<?php  
+		$msj = $this->session->flashdata('error');
+		if(!empty($msj)):
+		?>
+			<div class="error"> <?php echo $msj; ?> </div>
+			<script type="text/javascript">
+				setTimeout(function(){
+					$(".error").animate({
+						opacity: 0.0
+					});
+				},7000);
+			</script>
+		<?php
+		endif;
+
+		$msj = $this->session->flashdata('correcto');
+		if(!empty($msj)):
+		?>
+			<div class="correcto"> <?php echo $msj; ?> </div>
+			<script type="text/javascript">
+				setTimeout(function(){
+					$(".correcto").animate({
+						opacity: 0.0
+					});
+				},7000);
+			</script>
+		<?php
+		endif;
+	?>
 	<div id="container">
 		<div id="top_nav">
+			<?php if($this->session->userdata("loginTrue")): ?>
 			<ul>
-				<li><a href="javascript:void(0);">Login</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+				<li>
+					<a href="javascript:void(0);">
+						Bienvenido <?php echo $this->session->userdata("user"); ?>
+					</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+				<li><a href="javascript:void(0);">Perfil</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+				<li><a href="javascript:void(0);">Salir</a></li>
+			</ul>
+			<?php else: ?>
+			<ul>
+				<li><a id="bto_login" href="javascript:void(0);">Login</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
 				<li><a href="javascript:void(0);">Registrar</a></li>
 			</ul>
+			<?php endif; ?>
+		</div>
+		<div class="login">
+			<?php echo form_open("inicio/login"); ?>
+				<label for="">Usuario</label>
+				<input type="text" name="user" id="user">
+				<label for="">Clave</label>
+				<input type="password" name="pass" id="pass">
+				<input type="submit" name="btoEnviar" value="Enviar">
+			<?php echo form_close(); ?>
 		</div>
 		<header>
 			<div style="background: #fff;">

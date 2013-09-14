@@ -234,3 +234,43 @@ footer div{
 	color: #fff;
 	text-align: center;
 }
+
+.login{
+	display: none;
+	width: 300px;
+	min-height: 200px;
+	border: solid 1px #ccc;
+	position: absolute;
+	background: rgb(255,255,255);
+	top: 20px;
+	left: 60%;
+}
+
+.login input, .login label{
+	width: 100%;
+	font-size: 24px;
+	font-family: "sans-serif";
+}
+
+.correcto, .error{
+	position: absolute;
+	left: 75%;
+	padding: 10px;
+	text-align: left;
+	top: 200px;
+	font-size: 14px;
+	border-radius: 15px 15px 15px 15px;
+	width: 300px;
+	color: #333;
+	border: solid 5px #fff;
+	opacity: 1;
+	z-index: 3000;
+}
+
+.correcto{
+	background: #04B45F;
+}
+
+.error{
+	background: #bb1100;
+}

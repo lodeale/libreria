@@ -30,6 +30,19 @@ class Inicio_model extends CI_Model {
 		endif;
 	}
 
+
+	public function insertLibro($post){
+		$this->db->set("titulo",$post["titulo"]);
+		$this->db->set("descripcion",$post["descripcion"]);
+		$query = $this->db->insert("libros");
+		$last_id = $this->db->insert_id();
+		if($query):
+			return true;
+		else:
+			return false;
+		endif;
+	}
+
 }
 
 /* End of file inicio_model.php */

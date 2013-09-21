@@ -52,7 +52,7 @@
 						Bienvenido <?php echo $this->session->userdata("user"); ?>
 					</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
 				<li><a href="javascript:void(0);">Perfil</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-				<li><a href="javascript:void(0);">Salir</a></li>
+				<li><a href="<?php echo base_url("inicio/salir"); ?>">Salir</a></li>
 			</ul>
 			<?php else: ?>
 			<ul>
@@ -75,12 +75,17 @@
 				<h1><span class="espan gradiente">Lib</span> Encode</h1>
 				<nav>
 					<ul>
-						<li><a class="check_bto" href="javascript:void(0);">Inicio</a></li>
-						<li><a href="javascript:void(0);">Libros</a></li>
-						<li><a href="javascript:void(0);">Novedades</a></li>
-						<li><a href="javascript:void(0);">Contacto</a></li>
+						<li><a id="inicio" href="<?php echo base_url('inicio'); ?>">Inicio</a></li>
+						<li><a id="libros" href="<?php echo base_url('inicio/libros'); ?>">Libros</a></li>
+						<li><a id="novedades" href="<?php echo base_url('inicio/novedades'); ?>">Novedades</a></li>
+						<li><a id="contacto" href="<?php echo base_url('inicio/contacto'); ?>">Contacto</a></li>
 					</ul>
 				</nav>
+				<script type="text/javascript">
+					(function(act){
+						$("#"+act).addClass("check_bto");
+					})("<?php echo $opcActivo; ?>");
+				</script>
 			</div>
 			<div id="sub_header" class="gradiente divHor">
 				<div class="w350">

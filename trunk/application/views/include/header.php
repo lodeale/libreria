@@ -67,6 +67,7 @@
 				<input type="text" name="user" id="user">
 				<label for="">Clave</label>
 				<input type="password" name="pass" id="pass">
+				<br><br>
 				<input type="submit" name="btoEnviar" value="Enviar">
 			<?php echo form_close(); ?>
 		</div>

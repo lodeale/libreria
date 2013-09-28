@@ -274,3 +274,58 @@ footer div{
 .error{
 	background: #bb1100;
 }
+
+.libros_view{
+	width: 100%;
+}
+
+.libros_view article{
+	float: left;
+	padding: 10px;
+	margin-left: 5px; 
+	width: 150px;
+	height: 200px;
+	background: rgb(190,190,190);
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	text-align: center;
+}
+
+.libros_view article:hover{
+	box-shadow: 5px 5px 7px #333;
+}
+
+.subMenuAdmin ul li{
+	display: inline-table;
+}
+
+.subMenuAdmin input, .subMenuAdmin span{
+	display: inline-table;
+}
+
+.subMenuAdmin input{
+	width: 300px;
+	font-size: 1.2em;
+	border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	-o-border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	padding: 2px;
+}
+
+.icoSearch{
+	display: block;
+	width: 27px;
+	height: 24px;
+	background: #fff url(../img/icos.png) -307px -40px no-repeat;
+}
+
+.icoCarrito{
+	display: block;
+	width: 30px;
+	height: 30px;
+	background: url(../img/icos.png) -272px -40px no-repeat;
+}
+

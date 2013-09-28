@@ -31,17 +31,71 @@ class Inicio_model extends CI_Model {
 	}
 
 
-	public function insertLibro($post){
+	public function insertLibro($post, $id_c, $id_e, $image){
 		$this->db->set("titulo",$post["titulo"]);
 		$this->db->set("descripcion",$post["descripcion"]);
+		$this->db->set("id_categoria",$id_c);
+		$this->db->set("id_editorial",$id_c);
+		$this->db->set("fecha_emision",$post["fecha_emision"]);
+		$this->db->set("pagina",$post["pagina"]);
+		$this->db->set("precio",$post["precio"]);
+		$this->db->set("stock",$post["stock"]);
+		$this->db->set("imagen",$image);
 		$query = $this->db->insert("libros");
 		$last_id = $this->db->insert_id();
-		if($query):
-			return true;
+		if($last_id > 0):
+			return $last_id;
 		else:
 			return false;
 		endif;
 	}
+
+	public function insertCategoria($post){
+		$this->db->set("descripcion",$post["categoria"]);
+		$query = $this->db->insert("categoria");
+		$last_id = $this->db->insert_id();
+		if($last_id > 0):
+			return $last_id;
+		else:
+			return false;
+		endif;
+	}
+
+	public function insertEditorial($post){
+		$this->db->set("descripcion",$post["editorial"]);
+		$query = $this->db->insert("editorial");
+		$last_id = $this->db->insert_id();
+		if($last_id > 0):
+			return $last_id;
+		else:
+			return false;
+		endif;
+	}
+
+	public function insertAutor($post){
+		$this->db->set("nombre_apellido",$post["autor"]);
+		$query = $this->db->insert("autores");
+		$last_id = $this->db->insert_id();
+		if($last_id > 0):
+			return $last_id;
+		else:
+			return false;
+		endif;
+	}
+
+	public function addLibrosAutores($idL,$idA){
+		$this->db->set("id_libro",$idL);
+		$this->db->set("id_autor",$idA);
+		$query = $this->db->insert("libros_autores");
+		$last_id = $this->db->insert_id();
+		if($last_id > 0):
+			return $last_id;
+		else:
+			return false;
+		endif;
+	}
+
+
 
 }
 

@@ -53,9 +53,9 @@ class Inicio extends CI_Controller{
 
 	function do_upload()
 	{
-		
+
 		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size']	= '1000';
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
@@ -63,8 +63,8 @@ class Inicio extends CI_Controller{
 		$this->load->library('upload', $config);
 
 		if ( ! $this->upload->do_upload())
-		{
-			$this->session->flashdata('error',$this->upload->display_errors());
+		{		
+			$this->session->set_flashdata('error',$this->upload->display_errors());
 			redirect($this->_getModule());
 		}
 		else
@@ -126,10 +126,12 @@ class Inicio extends CI_Controller{
 		$id_editorial = $this->inicio_model->insertEditorial($post);
 		$id_autor = $this->inicio_model->insertAutor($post);
 		$id_libro = $this->inicio_model->insertLibro($post, $id_categoria, $id_editorial, $fname);
-		$idla = $this->inicio_model->addLibrosAutores($id_libro, $id_autor);
-		if($idla > 0):
+		$LibAut = $this->inicio_model->addLibrosAutores($id_libro, $id_autor);
+		if($LibAut === True):
+			$this->session->set_flashdata('correcto',"Su libro ha sido insertado correctamente");
 			redirect($this->_getModule());
 		else:
+			$this->session->set_flashdata('error',"Ha causa de un error no se pudo insertar el libro. Vuevla a intentarlo");
 			redirect($this->_getModule());
 		endif;
 	}

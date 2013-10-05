@@ -87,11 +87,10 @@ class Inicio_model extends CI_Model {
 		$this->db->set("id_libro",$idL);
 		$this->db->set("id_autor",$idA);
 		$query = $this->db->insert("libros_autores");
-		$last_id = $this->db->insert_id();
-		if($last_id > 0):
-			return $last_id;
+		if($query):
+			return True;
 		else:
-			return false;
+			return False;
 		endif;
 	}
 

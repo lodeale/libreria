@@ -16,13 +16,13 @@
 				<article>
 					<div>
 						<span class="r_image">
-							<img src="<?php echo base_url(); ?>assets/img/<?php echo $row->imagen; ?>" width="100" title="">
+							<img src="<?php echo base_url(); ?>uploads/<?php echo $row->imagen; ?>" width="150" title="">
 						</span>
 					</div>
-					<div>
+					<div class="parrafo1">
 						<p>
 							<?php  
-								echo $row->titulo . "<br>" . $row->descripcion;
+								echo "<span class='titulo1'>" .$row->titulo . "</span><br><br>" . substr($row->descripcion,0,150) . "...";
 							?>
 						</p>
 					</div>

@@ -1,18 +1,18 @@
 
 		<div id="wrapper">
 			<section id="sec_left">
-				<h3>Bastesellers</h3>
+				<h3>Estrenos</h3>
 				<?php foreach($libros as $row): ?>
 				<article>
 					<div>
 						<span class="r_image">
-							<img src="<?php echo base_url(); ?>assets/img/<?php echo $row->imagen; ?>" title="">
+							<img src="<?php echo base_url(); ?>uploads/<?php echo $row->imagen; ?>" width="150" title="">
 						</span>
 					</div>
 					<div>
 						<p>
 							<?php  
-								echo $row->titulo . "<br>" . $row->descripcion;
+								echo "<span class='titulo1'>" .$row->titulo . "</span><br><br>" . substr($row->descripcion,0,150) . "...";
 							?>
 						</p>
 					</div>
@@ -20,7 +20,7 @@
 				<?php endforeach; ?>		
 			</section>
 			<section id="sec_right">
-				<h3>Bastesellers</h3>
+				<h3>Mas Votados</h3>
 				<article>
 					<div>
 						<span class="r_image">

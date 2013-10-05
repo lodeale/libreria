@@ -53,8 +53,7 @@ class Inicio extends CI_Controller{
 
 	function do_upload()
 	{
-		var_dump($this->input->post());
-		exit;
+		
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '1000';
@@ -65,7 +64,6 @@ class Inicio extends CI_Controller{
 
 		if ( ! $this->upload->do_upload())
 		{
-			
 			$this->session->flashdata('error',$this->upload->display_errors());
 			redirect($this->_getModule());
 		}

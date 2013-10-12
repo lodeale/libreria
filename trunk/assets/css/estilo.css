@@ -366,3 +366,66 @@ footer div{
 	margin-top: -230px;
 	height: 220px;
 }
+
+.viewLibro{
+	width: 100%;
+}
+
+.viewLibro .libroCompleto{
+	width: 70%;
+	margin: auto;
+}
+
+.viewLibro .libroCompleto h2{
+	width: 100%;
+	text-align: center;
+}
+
+.viewLibro .libroCompleto div:nth-child(2){
+	width: 33%;
+	float: left;
+}
+
+.viewLibro .libroCompleto div:nth-child(3){
+	width: 100%;
+}
+
+.lista1{
+	text-decoration: none;
+}
+
+.comentarios{
+	width: 80%;
+	margin: auto;
+	margin-top: 100px;
+}
+
+.comentarios div{
+	width: 80%;
+	margin:auto;
+}
+
+.comentarios div ul{
+	list-style: none;
+	color: #555;
+}
+
+.comentarios div ul li{
+	min-height: 50px;
+	overflow: hidden;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	padding: 5px;
+	border-bottom: solid 1px #ccc;
+}
+
+.comentarios div ul li:nth-child(2n){
+	background: #fff;
+}
+
+.comentarios div img{
+	float: left;
+	margin-right: 15px; 
+}

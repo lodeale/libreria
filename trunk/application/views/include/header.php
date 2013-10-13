@@ -11,6 +11,23 @@
 				$(".login").fadeIn();
 			});
 		});
+
+		function insertComentario(){
+			var param = {
+				"nombre": $("#usuario").val(),
+				"comentario":$("#comentarioLibro").val(),
+				"id_libro": $("#id_libro").val()
+			}
+	
+			$.ajax({
+				type: 'POST',
+				url: '<?php echo base_url("index.php/inicio/addComentario"); ?>',
+				data: param,
+				success: function(response){
+					$("#commentResponse").html(response);
+				}
+			});
+		}
 	</script>
 </head>
 <body>

@@ -136,6 +136,41 @@ class Inicio extends CI_Controller{
 		endif;
 	}
 
+	public function verLibro($id_libro){
+		$this->_setModule("libros");
+
+		$data["libros"] = $this->inicio_model->getLibros($id_libro);
+		$data["comentarios"] = $this->inicio_model->getComentarios($id_libro);
+		$header["opcActivo"] = "libros";
+		$header["admin"] = $this->_admin();
+
+		$this->load->view("include/header",$header);
+		$this->load->view("libros/libro",$data);
+		$this->load->view("include/footer");
+	}
+
+	public function addComentario(){
+
+		$sess = $this->session->userdata("loginTrue");
+		$idLibro = $this->input->post("id_libro");
+		if($sess):
+			$id = (int)$this->session->userdata("id");
+			$user = $this->session->userdata("user");
+		else:
+			$id = null;
+			$user = $this->input->post("nombre");
+		endif;
+
+		$query = $this->inicio_model->insertComentario($id,$user,$this->input->post());
+		if($query):
+			$data["comentarios"] = $this->inicio_model->getComentarios($this->input->post("id_libro"));
+			$data["id_libro"] = $idLibro;
+			$this->load->view("libros/comentarioAjax",$data);
+		else:
+			echo "Error";
+		endif;
+	}
+
 	public function salir(){
 		$this->session->sess_destroy();
 		redirect($this->_getModule());

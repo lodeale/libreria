@@ -29,54 +29,35 @@
 				</article>
 			</section>
 			<section class="comentarios">
-				<div>
+				<div id="commentResponse">
 					<ul>
 						<li>
 							<h3>Comentarios</h3>
 							<img src="<?php echo base_url(); ?>assets/img/mCli.png" width="150">
-							<input type="text" name="nombre" id="nombre" size="44" required placeholder="Ingrese su nombre..."><br>
-							<textarea name="comentario" id="comentario" cols="50" rows="5" placeholder="Ingrese un comentario..."></textarea>
+							<?php 
+								$bar = uri_string(); 
+								list($c,$m,$id_libro) = explode("/",$bar);
+							?>
+							<input type="hidden" name="id_libro" id="id_libro" value="<?php echo $id_libro ?>">
+							<input type="text" name="usuario" id="usuario" size="44" required placeholder="Ingrese su nombre..."><br>
+							<textarea name="comentarioLibro" id="comentarioLibro" cols="50" rows="5" placeholder="Ingrese un comentario..."></textarea>
+							<input type="button" name="btoComentar" id="btoComentar" onclick="insertComentario();" value="Comentar">
 						</li>
-						<li>
-							<div>
-								<img src="<?php echo base_url(); ?>assets/img/mCli.png" width="50">
-								<h5>Fulano Miguel Angel</h5>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-									sdflgksjdflgkjsdflgkjsldfkjglñdf
-								</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<img src="<?php echo base_url(); ?>assets/img/mCli.png" width="50">
-								<h5>Fulano Miguel Angel</h5>
-								<p>
-									Lorem ipsum liqua. Ut enim ad minim veniam,
-								</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<img src="<?php echo base_url(); ?>assets/img/mCli.png" width="50">
-								<h5>Fulano Miguel Angel</h5>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									
-								</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<img src="<?php echo base_url(); ?>assets/img/mCli.png" width="50">
-								<h5>Fulano Miguel Angel</h5>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								</p>
-							</div>
-						</li>
+						<?php foreach ($comentarios as $row): ?>
+							<li>
+								<div>
+									<img src="<?php echo base_url(); ?>assets/img/mCli.png" width="50">
+									<h5><?php echo $row->nombre; ?>:</h5>
+									<p>
+										<?php echo $row->comentario; ?>
+										<br>
+										<h5 style="float:right;">
+											<?php echo $row->fecha . "|" . $row->hora; ?>
+										</h5>
+									</p>
+								</div>
+							</li>
+						<?php endforeach ?>
 					</ul>
 				</div>		
 			</section>

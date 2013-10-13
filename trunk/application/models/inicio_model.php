@@ -94,6 +94,32 @@ class Inicio_model extends CI_Model {
 		endif;
 	}
 
+	public function getComentarios($id_libro){
+		$this->db->where("id_libro = $id_libro");
+		$this->db->order_by("id_comentario","desc");
+		$query = $this->db->get("comentarios");
+		if($query->num_rows > 0):
+			return $query->result();
+		else:
+			return array();
+		endif;
+	}
+
+	public function insertComentario($id=null,$user=null, $post){
+		$this->db->set("id_usuario",$id);
+		$this->db->set("id_libro",$post["id_libro"]);
+		$this->db->set("nombre",$user);
+		$this->db->set("comentario",$post["comentario"]);
+		$this->db->set("fecha",date("Y-m-d",time()));
+		$this->db->set("hora",date("H:i:s",time()));
+		$query = $this->db->insert("comentarios");
+		if($query):
+			return True;
+		else:
+			return False;
+		endif;
+	}
+
 
 
 }

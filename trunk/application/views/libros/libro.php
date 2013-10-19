@@ -47,8 +47,8 @@
 							<li>
 								<div>
 									<img src="<?php echo base_url(); ?>assets/img/mCli.png" width="50">
-									<h5><?php echo $row->nombre; ?>:</h5>
 									<p>
+										<?php echo $row->nombre; ?>:
 										<?php echo $row->comentario; ?>
 										<br>
 										<h5 style="float:right;">

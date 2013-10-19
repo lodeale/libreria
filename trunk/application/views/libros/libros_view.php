@@ -13,7 +13,7 @@
 			<section class="libros_view">
 				<h3>Stock</h3>
 				<?php foreach($libros as $row): ?>
-				<article>
+				<article id="<?php echo $row->id_libro; ?>" >
 					<div>
 						<span class="r_image">
 							<img src="<?php echo base_url(); ?>uploads/<?php echo $row->imagen; ?>" width="150" title="">
@@ -27,7 +27,15 @@
 						</p>
 					</div>
 				</article>
-				<?php endforeach; ?>		
+				<?php endforeach; ?>
+				<script type="text/javascript">
+					(function(){
+						$("article").click(function(){
+							var id = $(this).attr('id');
+							location.href = '<?php echo base_url("inicio/verLibro"); ?>/'+id;
+						});
+					})();
+				</script>		
 			</section>
 			
 		</div>

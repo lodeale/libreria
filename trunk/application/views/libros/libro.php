@@ -2,29 +2,30 @@
 			
 			<section class="viewLibro">
 				<article class="libroCompleto">
-					<h2>El titulo del libro Acá</h2>
+					<h2><?php echo $libros[0]->titulo ?></h2>
 					<div>
-						<img src="<?php echo base_url(); ?>uploads/dolin.jpg" width="200" title="">
+						<img src="<?php echo base_url(); ?>uploads/<?php echo $libros[0]->imagen ?>" width="200" title="">
 					</div>
 					<div>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<?php echo htmlentities($libros[0]->descripcion,null,"UTF-8"); ?>
 						</p>
 						<br><br>
 						<h3>Detalle:</h3>
 						<ul class="lista1">
-							<li>Autor: Tanto</li>
-							<li>Categoria: tanto</li>
-							<li>Editorial: tanto</li>
+							<li>Autor: <?php echo $libros[0]->nombre_apellido; ?></li>
+							<li>Categoria: <?php echo $libros[0]->categoria ?></li>
+							<li>Editorial: <?php echo $libros[0]->editorial ?></li>
 							<li>Pagin: 124</li>
 							<li>Stock: 1</li>
 							<li>Precio: $10</li>
 						</ul>
+						<?php if($admin): ?>
+							<div class="opciones" style="width:100%;height:50px;text-align:right;">
+								<a href="<?php echo base_url("inicio/modificarLibro/".$libros[0]->id_libro); ?>">Modificar</a>
+								<a href="">Eliminar</a>
+							</div>
+						<?php endif; ?>
 					</div>
 				</article>
 			</section>
@@ -40,7 +41,7 @@
 							?>
 							<input type="hidden" name="id_libro" id="id_libro" value="<?php echo $id_libro ?>">
 							<input type="text" name="usuario" id="usuario" size="44" required placeholder="Ingrese su nombre..."><br>
-							<textarea name="comentarioLibro" id="comentarioLibro" cols="50" rows="5" placeholder="Ingrese un comentario..."></textarea>
+							<textarea name="comentarioLibro" id="comentarioLibro" cols="43" rows="5" placeholder="Ingrese un comentario..."></textarea>
 							<input type="button" name="btoComentar" id="btoComentar" onclick="insertComentario();" value="Comentar">
 						</li>
 						<?php foreach ($comentarios as $row): ?>

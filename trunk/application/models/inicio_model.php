@@ -20,14 +20,61 @@ class Inicio_model extends CI_Model {
 
 	}
 
-	public function getLibros(){
-		//SELECT * FROM libros
+	public function getLibros($id=null){
+		if(!empty($id)):
+			$this->db->where("id_libro",$id);
+		endif;
 		$query = $this->db->get("libros");
 		if($query->num_rows > 0):
 			return $query->result();
 		else:
 			return array();
 		endif;
+	}
+
+	public function getLibrosCompleto($id=null){
+		$this->db->select("l.id_libro, autores.id_autor, autores.nombre_apellido, l.titulo, l.descripcion, l.fecha_emision, l.pagina, l.precio, l.stock, l.imagen, e.id_editorial, e.descripcion as editorial, c.id_categoria, c.descripcion as categoria");
+
+		$this->db->from("libros as l, categoria as c, editorial as e, autores");
+		$this->db->join("(SELECT l.id_libro, a.id_autor FROM libros as l JOIN libros_autores as la ON la.id_libro = l.id_libro JOIN autores as a ON a.id_autor = la.id_autor) alibro","alibro.id_libro = l.id_libro","left");
+		$this->db->where("c.id_categoria = l.id_categoria");
+		$this->db->where("e.id_editorial = l.id_editorial");
+		$this->db->where("alibro.id_autor = autores.id_autor");
+
+		if(!empty($id)):
+			$this->db->where("l.id_libro",$id);
+		endif;
+
+		$query = $this->db->get();
+		if($query->num_rows > 0):
+			return $query->result();
+		else:
+			return array();
+		endif;
+	}
+
+	public function getAutor($id=null){
+		if(!empty($id)):
+			$this->db->where("id_autor",$id);
+		endif;
+		$query = $this->db->get("autores");
+		if($query->num_rows > 0):
+			return $query->result();
+		else:
+			return array();
+		endif;	
+	}
+
+	public function getAutorLibro($idlibro = null){
+		if(!empty($idlibro)):
+			$this->db->where("id_libro",$idlibro);
+		endif;
+		$query = $this->db->get("libros_autores");
+		if($query->num_rows > 0):
+			return $query->result();
+		else:
+			return array();
+		endif;	
 	}
 
 
@@ -50,6 +97,24 @@ class Inicio_model extends CI_Model {
 		endif;
 	}
 
+	public function updateLibro($post){
+		$this->db->set("titulo",$post["titulo"]);
+		$this->db->set("descripcion",$post["descripcion"]);
+		$this->db->set("id_categoria",$post["categoria"]);
+		$this->db->set("id_editorial",$post["editorial"]);
+		$this->db->set("fecha_emision",$post["fecha_emision"]);
+		$this->db->set("pagina",$post["pagina"]);
+		$this->db->set("precio",$post["precio"]);
+		$this->db->set("stock",$post["stock"]);
+		$this->db->where("id_libro",$post["id_libro"]);
+		$query = $this->db->update("libros");
+		if($query):
+			return True;
+		else:
+			return False;
+		endif;
+	}
+
 	public function insertCategoria($post){
 		$this->db->set("descripcion",$post["categoria"]);
 		$query = $this->db->insert("categoria");
@@ -59,6 +124,18 @@ class Inicio_model extends CI_Model {
 		else:
 			return false;
 		endif;
+	}
+
+	public function getCategoria($id=null){
+		if(!empty($id)):
+			$this->db->where("id_categoria",$id);
+		endif;
+		$query = $this->db->get("categoria");
+		if($query->num_rows > 0):
+			return $query->result();
+		else:
+			return array();
+		endif;	
 	}
 
 	public function insertEditorial($post){
@@ -71,6 +148,19 @@ class Inicio_model extends CI_Model {
 			return false;
 		endif;
 	}
+
+	public function getEditorial($id=null){
+		if(!empty($id)):
+			$this->db->where("id_editorial",$id);
+		endif;
+		$query = $this->db->get("editorial");
+		if($query->num_rows > 0):
+			return $query->result();
+		else:
+			return array();
+		endif;	
+	}
+
 
 	public function insertAutor($post){
 		$this->db->set("nombre_apellido",$post["autor"]);

@@ -95,6 +95,9 @@
 					<ul>
 						<li><a id="inicio" href="<?php echo base_url('inicio'); ?>">Inicio</a></li>
 						<li><a id="libros" href="<?php echo base_url('inicio/libros'); ?>">Libros</a></li>
+						<?php if($this->session->userdata("privilegio") == 1): ?>
+							<li><a id="cargas" href="<?php echo base_url('inicio/cargas'); ?>">Cargas</a></li>
+						<?php endif; ?>
 						<li><a id="novedades" href="<?php echo base_url('inicio/novedades'); ?>">Novedades</a></li>
 						<li><a id="contacto" href="<?php echo base_url('inicio/contacto'); ?>">Contacto</a></li>
 					</ul>

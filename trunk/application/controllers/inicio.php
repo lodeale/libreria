@@ -95,10 +95,10 @@ class Inicio extends CI_Controller{
 	public function libros(){
 		$this->_setModule("libros");
 
-		$data["libros"] = $this->inicio_model->getLibros();
+		$data["libros"] = $this->inicio_model->getLibros(null);
 		$header["opcActivo"] = "libros";
 		$header["admin"] = $this->_admin();
-
+		
 		$this->load->view("include/header",$header);
 		$this->load->view("libros/libros_view",$data);
 		$this->load->view("include/footer");
@@ -115,6 +115,22 @@ class Inicio extends CI_Controller{
 
 		$this->load->view("include/header",$header);
 		$this->load->view("libros/newLibros");
+		$this->load->view("include/footer");
+	}
+
+	public function modificarLibro($id_libro){
+		if(!$this->_admin()):
+			redirect($this->_getModule());
+		endif;
+		$this->_setModule("modificarLibro/".$id_libro);
+
+		$header["opcActivo"] = "libros";
+		$data["libros"] = $this->inicio_model->getLibrosCompleto($id_libro);
+		$data["categoria"] = $this->inicio_model->getCategoria();
+		$data["editorial"] = $this->inicio_model->getEditorial();
+		$data["autor"] = $this->inicio_model->getAutor();
+		$this->load->view("include/header",$header);
+		$this->load->view("libros/modLibros",$data);
 		$this->load->view("include/footer");
 	}
 
@@ -136,10 +152,23 @@ class Inicio extends CI_Controller{
 		endif;
 	}
 
-	public function verLibro($id_libro){
-		$this->_setModule("libros");
+	public function actualizarLibro(){
+		$post = $this->input->post();
+		$libro = $this->inicio_model->updateLibro($post);
+		if($libro):
+			$this->session->set_flashdata('correcto',"Su libro ha sido actualizado correctamente");
+			redirect($this->_getModule());
+		else:
+			$this->session->set_flashdata('error',"Ha causa de un error no se pudo actualizar el libro. Vuevla a intentarlo");
+			redirect($this->_getModule());
+		endif;	
+	}
 
-		$data["libros"] = $this->inicio_model->getLibros($id_libro);
+	public function verLibro($id_libro){
+		$this->_setModule("verLibro/".$id_libro);
+
+		$data["libros"] = $this->inicio_model->getLibrosCompleto($id_libro);
+		
 		$data["comentarios"] = $this->inicio_model->getComentarios($id_libro);
 		$header["opcActivo"] = "libros";
 		$header["admin"] = $this->_admin();

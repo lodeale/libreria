@@ -7,6 +7,8 @@ class Inicio extends CI_Controller{
 		parent::__construct();
 		$this->load->helper("form");
 		$this->load->model("inicio_model");
+
+		$this->load->library('cart');
 	}
 
 	function index(){
@@ -74,6 +76,7 @@ class Inicio extends CI_Controller{
 	}
 
 	public function login(){
+		
 		$query = $this->inicio_model->validLogin($this->input->post());
 		if($query):
 			$data_session = array(
@@ -176,6 +179,47 @@ class Inicio extends CI_Controller{
 		$this->load->view("include/header",$header);
 		$this->load->view("libros/libro",$data);
 		$this->load->view("include/footer");
+	}
+
+
+	public function colocarCarrito(){
+		$post = $this->input->post();
+		$data = array(
+               'id'      => $post["id_libro"],
+               'qty'     => 1,
+               'price'   => $post["precio"],
+               'name'    => $post["titulo"],
+               'options' => array('Categoría' => $post["categoria"])
+            );
+
+		$this->cart->insert($data);
+
+		$this->load->view("libros/insertLibro_ajax");
+	}
+
+	public function comprarLibro(){		
+		$prod = $this->cart->contents();
+		$cant = sizeof($prod);
+		$proc = 0;
+
+		foreach($prod as $key=>$row):
+			$proc++;
+			if ($this->inicio_model->updateStockProductos($row["id"]))
+				continue;
+
+			break;
+		endforeach;
+
+		if($cant == $proc):
+			$this->cart->destroy();
+
+			$this->session->set_flashdata('correcto',"Su compra fue efectuada.");
+			redirect($this->_getModule());
+		else:
+			$this->session->set_flashdata('error',"No se pudieron procesar todo los libros. Por favor chequee su compra y avise al propietario. Gracias y disculpe las molestias.");
+			redirect($this->_getModule());
+		endif;
+
 	}
 
 	public function addComentario(){

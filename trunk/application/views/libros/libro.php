@@ -2,7 +2,11 @@
 			
 			<section class="viewLibro">
 				<article class="libroCompleto">
-					<h2><?php echo $libros[0]->titulo ?></h2>
+					<h2>
+						<?php echo $libros[0]->titulo ?>
+						<input type="hidden" name="titulo" id="titulo" value="<?php echo $libros[0]->titulo ?>">
+						<input type="hidden" name="id_libro" id="id_libro" value="<?php echo $libros[0]->id_libro ?>">
+					</h2>
 					<div>
 						<img src="<?php echo base_url(); ?>uploads/<?php echo $libros[0]->imagen ?>" width="200" title="">
 					</div>
@@ -14,12 +18,20 @@
 						<h3>Detalle:</h3>
 						<ul class="lista1">
 							<li>Autor: <?php echo $libros[0]->nombre_apellido; ?></li>
-							<li>Categoria: <?php echo $libros[0]->categoria ?></li>
+							<li>
+								Categoria: <?php echo $libros[0]->categoria ?>
+								<input type="hidden" id="categoria" name="categoria" value="<?php echo $libros[0]->categoria ?>">
+							</li>
 							<li>Editorial: <?php echo $libros[0]->editorial ?></li>
-							<li>Pagin: 124</li>
-							<li>Stock: 1</li>
-							<li>Precio: $10</li>
+							<li>Pagina: <?php echo $libros[0]->pagina ?></li>
+							<li>Stock: <?php echo $libros[0]->stock; ?></li>
+							<li>
+								Precio: <?php echo $libros[0]->precio ?>
+								<input type="hidden" name="precio" id="precio" value="<?php echo $libros[0]->precio ?>">
+							</li>
 						</ul>
+						<br>
+						<a href="javascript:colocarCarrito();" style="display:block;background:#333;color:#fff;text-align:center">Comprar Libro</a>
 						<?php if($admin): ?>
 							<div class="opciones" style="width:100%;height:50px;text-align:right;">
 								<a href="<?php echo base_url("inicio/modificarLibro/".$libros[0]->id_libro); ?>">Modificar</a>

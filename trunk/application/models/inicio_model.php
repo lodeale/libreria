@@ -53,6 +53,16 @@ class Inicio_model extends CI_Model {
 		endif;
 	}
 
+	public function updateStockProductos($id){
+		$query = $this->db->query("UPDATE libros SET stock = stock - 1 WHERE id_libro = $id");
+		if ($query):
+			return True;
+		else:
+			return False;
+		endif;
+		
+	}
+
 	public function getAutor($id=null){
 		if(!empty($id)):
 			$this->db->where("id_autor",$id);
